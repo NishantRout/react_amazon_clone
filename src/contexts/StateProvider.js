@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 export const StateContext = createContext();
 
-const StateProvider = ({ reducer, initialState, children }) => {
+export const StateProvider = ({ reducer, initialState, children }) => {
     return (
         <StateContext.Provider value={useReducer(reducer, initialState)}>
             {children}
@@ -10,8 +10,8 @@ const StateProvider = ({ reducer, initialState, children }) => {
     );
 }
 
-export default StateProvider;
-
 export const useStateValue = () => {
-    useContext(StateContext);
+    return (
+        useContext(StateContext)
+    )
 }

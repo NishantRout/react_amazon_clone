@@ -4,19 +4,22 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Checkout from './components/Checkout';
+import Login from './components/Login';
 
 function App() {
   return (
     <Router>
       <div className="app">
-        <Navbar />
-
         <Switch>
           <Route path="/checkout">
+            <Navbar />
             <Checkout />
           </Route>
-          <Route path="/login" />
+          <Route path="/login" >
+            <Login />
+          </Route>
           <Route path="/">
+            <Navbar />
             <Home />
           </Route>
         </Switch>

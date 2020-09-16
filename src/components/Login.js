@@ -1,12 +1,18 @@
 import { auth } from '../config/firebase';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import BarLoader from "react-spinners/BarLoader";
+import { css } from "@emotion/core";
 import './css/Login.css';
 
 function Login() {
     const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const override = css`
+        margin-top: 20px;
+    `;
     const handleEmail = (e) => {
         setEmail(e.target.value);
     }
@@ -16,10 +22,13 @@ function Login() {
 
     const signIn = (e) => {
         e.preventDefault();
+        setLoading(true);
         auth.signInWithEmailAndPassword(
             email, password
-        ).then(auth => {
-            history.push('/');
+        ).then((auth) => {
+            if (auth) {
+                history.push('/');
+            }
         }).catch(error => {
             alert(error.message);
         });
@@ -52,7 +61,7 @@ function Login() {
                     <h5>Email</h5>
                     <input type="text" value={email} onChange={handleEmail} />
 
-                    <h5>Email</h5>
+                    <h5>Password</h5>
                     <input type="password" value={password} onChange={handlePassword} />
 
                     <button className="login__signInButton" type="submit" onClick={signIn} >Sign in</button>
@@ -65,6 +74,12 @@ function Login() {
                     <button className="login__registerButton" type="submit" onClick={register} >Create your Amazon Account</button>
                 </form>
             </div>
+            <BarLoader
+                css={override}
+                size={60}
+                color={"#F1C14A"}
+                loading={loading}
+            />
         </div>
     )
 }

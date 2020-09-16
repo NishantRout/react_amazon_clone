@@ -5,7 +5,7 @@ import './css/Checkout.css';
 import Subtotal from './Subtotal';
 
 function Checkout() {
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
     return (
         <div className="checkout">
             <div className="checkout__left">
@@ -15,10 +15,13 @@ function Checkout() {
                     alt="checkout ad"
                 />
                 <div>
+                    <h5 className="user__details" >Hello {user?.email}</h5>
                     <h2 className="checkout__title">
                         Your Shopping Basket
                     </h2>
-                    {basket.map(item => (
+
+                    {}
+                    {basket.length > 0 ? basket.map(item => (
                         <CheckoutProduct
                             id={item.id}
                             title={item.title}
@@ -26,7 +29,9 @@ function Checkout() {
                             price={item.price}
                             rating={item.rating}
                         />
-                    ))}
+                    )) :
+                        <p className="empty__cart">You have no items in your basket. To buy one or more items, click "Add to basket" next to the item.</p>
+                    }
                 </div>
             </div>
 

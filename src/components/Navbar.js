@@ -4,9 +4,15 @@ import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useStateValue } from '../contexts/StateProvider';
+import { auth } from '../config/firebase';
 
 function Navbar(props) {
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
+    const handleAuth = () => {
+        if (user) {
+            auth.signOut();
+        }
+    }
     return (
         <nav className="header">
             <Link to="/">
@@ -26,10 +32,12 @@ function Navbar(props) {
             </div>
 
             <div className="header__nav">
-                <Link className="header__link" to="/login">
-                    <div className="header__option">
-                        <span className="header__optionLineOne">Hello </span>
-                        <span className="header__optionLineTwo">Sign In</span>
+                <Link className="header__link" to={!user && '/login'}>
+                    <div onClick={handleAuth} className="header__option">
+                        <span className="header__optionLineOne">Hello {user ? user?.email : 'user'}</span>
+                        <span className="header__optionLineTwo">
+                            {user ? 'Sign Out' : 'Sign In'}
+                        </span>
                     </div>
                 </Link>
                 <Link className="header__link" to="/">

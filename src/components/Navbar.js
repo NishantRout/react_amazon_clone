@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useStateValue } from '../contexts/StateProvider';
 
-function Navbar() {
+function Navbar(props) {
     const [{ basket }, dispatch] = useStateValue();
     return (
         <nav className="header">
@@ -28,7 +28,7 @@ function Navbar() {
             <div className="header__nav">
                 <Link className="header__link" to="/login">
                     <div className="header__option">
-                        <span className="header__optionLineOne">Hello Nishant</span>
+                        <span className="header__optionLineOne">Hello </span>
                         <span className="header__optionLineTwo">Sign In</span>
                     </div>
                 </Link>

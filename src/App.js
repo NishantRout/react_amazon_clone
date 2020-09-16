@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+import { auth } from './config/firebase';
 
 function App() {
+
+  useEffect(() => {
+    auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+
+      } else {
+
+      }
+    })
+  }, [])
+
   return (
     <Router>
       <div className="app">
